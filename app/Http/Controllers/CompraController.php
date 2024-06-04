@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Compra\CompraStoreRequest;
+use App\Http\Resources\Compra\CompraIndexResource;
 use App\Models\Compra;
 use App\Models\Entrada;
 use Exception;
@@ -10,6 +11,19 @@ use Illuminate\Support\Facades\DB;
 
 class CompraController extends Controller
 {
+    public function index()
+    {
+        $usuario = auth()->user();
+        $compras = $usuario->persona->load([
+            'compras',
+            'compras.detallesCompra',
+            'compras.carrera',
+            'compras.detallesCompra.entrada',
+        ])->compras;
+
+        return CompraIndexResource::collection($compras);
+    }
+
     public function comprar(CompraStoreRequest $request)
     {
         DB::transaction(function () use ($request) {
@@ -28,6 +42,8 @@ class CompraController extends Controller
             $compra->total = $detalles->sum('subtotal');
             $compra->save();
         });
+
+        return response()->json(['message' => 'Compra realizada con éxito'], 201);
     }
 
     private function getEntradas($entradas)

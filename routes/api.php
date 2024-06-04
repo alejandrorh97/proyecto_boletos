@@ -46,13 +46,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::name('perfil.')->prefix('perfil')->group(function () {
         Route::get('/me', [AuthController::class, 'perfil'])->name('index');
-        
-        Route::name('entradas.')->prefix('entradas')->group(function () {
-            //todo
-        });
+        Route::post('/updatePerfil', [AuthController::class, 'updatePerfil'])->name('update');
 
         Route::name('compras.')->prefix('compras')->group(function () {
-            //todo
+            Route::get('/index', [CompraController::class, 'index'])->name('index');
         });
 
         Route::name('direcciones.')->prefix('direcciones')->group(function () {

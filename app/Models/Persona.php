@@ -27,4 +27,9 @@ class Persona extends Model
     {
         return $this->hasMany(Direccion::class);
     }
+
+    public function compras()
+    {
+        return $this->hasMany(Compra::class);
+    }
 }

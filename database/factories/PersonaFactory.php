@@ -14,7 +14,7 @@ class PersonaFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'telefono' => $this->faker->phoneNumber(),
             'fecha_nacimiento' => $this->faker->date(),
-            'genero' => $this->faker->randomElement(['masculino', 'femenino', 'otro']),
+            'genero' => $this->faker->randomElement(['hombre', 'mujer', 'otro']),
         ];
     }
 }

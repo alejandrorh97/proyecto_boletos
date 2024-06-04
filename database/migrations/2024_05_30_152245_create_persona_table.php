@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('telefono')->nullable();
             $table->date('fecha_nacimiento');
-            $table->enum('genero', ['masculino', 'femenino', 'otro'])->default('otro');
+            $table->enum('genero', ['hombre', 'mujer', 'otro'])->default('otro');
             $table->timestamps();
         });
     }

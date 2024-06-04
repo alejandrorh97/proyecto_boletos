@@ -21,6 +21,8 @@ class CompraStoreRequest extends FormRequest
                 'array',
                 'min:1',
                 new CheckEntrada,
+                #entradas.*.id
+                #entradas.*.cantidad
             ],
         ];
     }

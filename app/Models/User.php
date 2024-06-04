@@ -15,6 +15,7 @@ class User extends Authenticatable
         'persona_id',
         'name',
         'email',
+        'role',
         'password',
         'api_token',
     ];
