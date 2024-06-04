@@ -2,10 +2,18 @@
 
 namespace App\Http\Requests\Auth;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegistrarRequest extends FormRequest
 {
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'fecha_nacimiento' => Carbon::createFromFormat('Y/m/d', $this->fecha_nacimiento)->format('d-m-Y'),
+        ]);
+    }
+
     public function rules(): array
     {
         return [

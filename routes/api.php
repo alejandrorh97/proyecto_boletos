@@ -10,22 +10,6 @@ Route::name('auth.')->prefix('auth')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::name('equipos.')->prefix('equipos')->group(function () {
-        Route::get('/index', [EquipoController::class, 'index'])->name('index');
-        Route::post('/store', [EquipoController::class, 'store'])->name('store');
-        Route::get('/show/{equipo}', [EquipoController::class, 'show'])->name('show');
-        Route::put('/update/{equipo}', [EquipoController::class, 'update'])->name('update');
-        Route::delete('/delete/{equipo}', [EquipoController::class, 'destroy'])->name('destroy');
-    });
-
-    Route::name('circuitos.')->prefix('circuitos')->group(function () {
-        Route::get('/index', [CircuitoController::class, 'index'])->name('index');
-        Route::post('/store', [CircuitoController::class, 'store'])->name('store');
-        Route::get('/show/{circuito}', [CircuitoController::class, 'show'])->name('show');
-        Route::put('/update/{circuito}', [CircuitoController::class, 'update'])->name('update');
-        Route::delete('/delete/{circuito}', [CircuitoController::class, 'destroy'])->name('destroy');
-    });
-
     Route::name('carreras.')->prefix('carreras')->group(function () {
         Route::get('/index', [CarreraController::class, 'index'])->name('index');
         Route::post('/store', [CarreraController::class, 'store'])->name('store');
