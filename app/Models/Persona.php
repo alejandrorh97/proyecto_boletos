@@ -32,4 +32,9 @@ class Persona extends Model
     {
         return $this->hasMany(Compra::class);
     }
+
+    public function marcaciones()
+    {
+        return $this->hasMany(Marcacion::class);
+    }
 }

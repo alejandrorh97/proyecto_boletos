@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{AuthController, CarreraController, CircuitoController, CompraController, DireccionController, EntradaController, EquipoController};
+use App\Http\Controllers\{AuthController, CarreraController, CircuitoController, CompraController, DireccionController, EntradaController, EquipoController, MarcarController};
 use Illuminate\Support\Facades\Route;
 
 Route::name('auth.')->prefix('auth')->group(function () {
@@ -40,5 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/show', [DireccionController::class, 'show'])->name('show');
             Route::post('/store', [DireccionController::class, 'store'])->name('store');
         });
+
+        Route::post('/marcar', [MarcarController::class, 'marcar'])->name('marcar');
     });
 });
