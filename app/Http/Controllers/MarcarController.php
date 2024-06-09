@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Marcacion\MarcarRequest;
 use App\Http\Resources\Marcar\MisMarcacionesResource;
+use App\Models\Marcacion;
 use App\Models\QRCodigo;
 
 class MarcarController extends Controller
@@ -26,8 +27,11 @@ class MarcarController extends Controller
     {
         $persona = auth()->user()->persona;
 
-        $marcaciones = $persona->load('marcaciones.codigo', 'marcaciones')->marcaciones;
-
+        $marcaciones = Marcacion::query()
+            ->where('persona_id', $persona->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        
         return MisMarcacionesResource::collection($marcaciones);
     }
 }
