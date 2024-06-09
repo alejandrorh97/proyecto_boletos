@@ -30,6 +30,10 @@ class GenerarMarcaciones extends Command
             $hora = $codigo->tipo === 'entrada' ? '14:00:00' : '00:00:00';
             $fecha = $codigo->created_at->format('Y-m-d') . ' ' . $hora;
 
+            if ($usuario->marcaciones()->where('codigo_id', $codigo->id)->exists()) {
+                continue;
+            }
+
             $usuario->marcaciones()->create([
                 'codigo_id' => $codigo->id,
                 'created_at' => $fecha,

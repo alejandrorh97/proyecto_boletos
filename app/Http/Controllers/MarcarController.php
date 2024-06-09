@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Marcacion\MarcarRequest;
 use App\Http\Resources\Marcar\MisMarcacionesResource;
-use App\Models\Marcacion;
-use App\Models\QRCodigo;
-
+use App\Models\{Marcacion, QRCodigo};
 class MarcarController extends Controller
 {
     public function marcar(MarcarRequest $request)
@@ -18,9 +16,11 @@ class MarcarController extends Controller
 
         $persona = auth()->user()->persona;
 
-        $persona->marcaciones()->create([
-            'codigo_id' => $codigo->id,
-        ]);
+        if (!$persona->marcaciones()->where('codigo_id', $codigo->id)->exists()) {
+            $persona->marcaciones()->create([
+                'codigo_id' => $codigo->id,
+            ]);
+        }
     }
 
     public function misMarcaciones()
