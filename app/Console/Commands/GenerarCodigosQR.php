@@ -14,14 +14,24 @@ class GenerarCodigosQR extends Command
     public function handle()
     {
         $this->info('Generando códigos QR...');
+        $now = now();
 
-        QRCodigo::factory()->create([
-            'tipo' => 'entrada',
-        ]);
+        for ($i = 0; $i < 30; $i++) {
+            QRCodigo::factory()->create([
+                'tipo'       => 'entrada',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
+            QRCodigo::factory()->create([
+                'tipo'       => 'salida',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
 
-        QRCodigo::factory()->create([
-            'tipo' => 'salida',
-        ]);
+            $this->info('Códigos QR generados para ' . $now->format('d-m-Y'));
+
+            $now->addDay();
+        }
 
         $this->info('Códigos QR generados correctamente.');
     }

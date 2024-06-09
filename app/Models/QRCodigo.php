@@ -14,6 +14,8 @@ class QRCodigo extends Model
     protected $fillable = [
         'codigo',
         'tipo',
+        'created_at',
+        'updated_at',
     ];
 
     public function marcaciones()
