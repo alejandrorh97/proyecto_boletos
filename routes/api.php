@@ -1,12 +1,22 @@
 <?php
 
-use App\Http\Controllers\{AuthController, CarreraController, CompraController, DireccionController, EntradaController, MarcarController};
+use App\Http\Controllers\{AuthController, CarreraController, CompraController, DireccionController, EntradaController, InmuebleController, MarcarController, PropietarioController};
 use Illuminate\Support\Facades\Route;
 
 Route::name('auth.')->prefix('auth')->group(function () {
     Route::post('registrar', [AuthController::class, 'registrar'])->name('registrar');
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum')->name('logout');
+});
+
+Route::name('propietarios.')->prefix('propietarios')->group(function () {
+    Route::get('/index', [PropietarioController::class, 'index'])->name('index');
+    Route::post('/create', [PropietarioController::class, 'store'])->name('store');
+});
+
+Route::name('inmuebles.')->prefix('inmuebles')->group(function () {
+    Route::get('/index/{propietario}', [InmuebleController::class, 'index'])->name('index');
+    Route::post('/create', [InmuebleController::class, 'store'])->name('store');
 });
 
 Route::middleware('auth:sanctum')->group(function () {
